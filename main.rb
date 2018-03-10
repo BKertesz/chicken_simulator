@@ -22,13 +22,28 @@ def farm_goods(hash,good)
   return hash[good]
 end
 
+# Check if player has enough stamina to perform a task
+def check_player_stamina(player_hash,amount)
+  return true if player_hash[:stamina] >= amount
+  return false
+end
+
 def player_stamina_change(player_hash,amount)
   return player_hash[:stamina] += amount.to_i
 end
 
 def player_get_goods(player_hash,farm_hash,item,amount)
-  player_hash[:stamina] -= 1
+  return 'Unkown item..' if !farm_hash.has_key?(item)
+  return 'Player is too tired.' if player_hash[:stamina] <= 0
+  player_stamina_change(player_hash,-1)
   return farm_hash[item] += amount
+end
+
+# Unified stat change for player
+# Beware as it removes old value
+def change_player_stat(player_hash,stat_to_change,amount)
+  return 'Error, wrong stat.' if !player_hash.has_key?(stat_to_change)
+  return player_hash[stat_to_change] = amount
 end
 
 

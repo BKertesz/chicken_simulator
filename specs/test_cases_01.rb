@@ -49,9 +49,16 @@ def test_add_item_to_player()
   assert_equal(1,player_inventory(@player).length)
 end
 
+# Add standard item to the farm
 def test_chop_some_wood()
+  @player[:stamina] = 1
   player_get_goods(@player,@farm,:wood,1)
   assert_equal(1,farm_goods(@farm,:wood))
+end
+# Try to add unkown item to the farm hash
+def test_add_unkown_good()
+  test_error = 'Unkown item..'
+  assert_equal(test_error,player_get_goods(@player,@farm,:gold,1))
 end
 
 # Checks for player stamina
@@ -67,6 +74,27 @@ def test_player_stamina__negative()
   result = @player[:stamina]
   assert_equal(-5,result)
 end
+
+# Two cases check if player can lose stamina or not
+def test_player_can_lose_stamina_true()
+  @player[:stamina] = 1
+  assert_equal(true,check_player_stamina(@player,1))
+end
+
+def test_player_can_lose_stamina_false()
+  assert_equal(false,check_player_stamina(@player,1))
+end
+
+def test_change_player_stats()
+# Function test for different changes in player player hash
+  change_player_stat(@player,:name,'John')
+  change_player_stat(@player,:money,100)
+  result1 = @player[:name]
+  result2 = @player[:money]
+  assert_equal("John",result1)
+  assert_equal(100,result2)
+end
+
 
 
 end
