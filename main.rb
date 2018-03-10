@@ -46,5 +46,16 @@ def change_player_stat(player_hash,stat_to_change,amount)
   return player_hash[stat_to_change] = amount
 end
 
+def can_afford(player_hash,item_hash)
+  return true if player_hash[:money] >= item_hash[:price]
+  return false
+end
+
+def player_buy(player_hash,object_hash,farm_hash)
+  return nil if !can_afford(player_hash,object_hash)
+  change_player_money(player_hash,-object_hash[:price])
+  farm_hash[:animals].push(object_hash)
+end
+
 
 # End of File

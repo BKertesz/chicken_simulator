@@ -95,6 +95,22 @@ def test_change_player_stats()
   assert_equal(100,result2)
 end
 
+def test_if_player_can_afford_something()
+  @player[:money] = 50
+  assert_equal(true,can_afford(@player,@chicken))
+end
+
+def test_if_player_can_t_afford_something()
+  assert_equal(false,can_afford(@player,@chicken))
+end
+
+def test_player_buys_something()
+  @player[:money] = 100
+  player_buy(@player,@chicken,@farm)
+  assert_equal(50,player_money(@player))
+  assert_equal(1,@farm[:animals].length)
+end
+
 
 
 end
