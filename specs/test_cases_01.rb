@@ -7,7 +7,8 @@ def setup()
   @player = {
     name:"Pawel",
     money:0,
-    inventory:[]
+    inventory:[],
+    stamina:0
   }
 
   @farm = {
@@ -48,6 +49,24 @@ def test_add_item_to_player()
   assert_equal(1,player_inventory(@player).length)
 end
 
+def test_chop_some_wood()
+  player_get_goods(@player,@farm,:wood,1)
+  assert_equal(1,farm_goods(@farm,:wood))
+end
+
+# Checks for player stamina
+def test_player_stamina()
+  player_stamina_change(@player,5)
+  result = @player[:stamina]
+  assert_equal(5,result)
+end
+
+# Checks for negative value
+def test_player_stamina__negative()
+  player_stamina_change(@player,-5)
+  result = @player[:stamina]
+  assert_equal(-5,result)
+end
 
 
 end
