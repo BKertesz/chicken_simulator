@@ -81,10 +81,12 @@ def test_player_can_lose_stamina_true()
   assert_equal(true,check_player_stamina(@player,1))
 end
 
+# Early implementation of energy system
 def test_player_can_lose_stamina_false()
   assert_equal(false,check_player_stamina(@player,1))
 end
 
+# Used for more or less for testing. Eg. not to use ingame
 def test_change_player_stats()
 # Function test for different changes in player player hash
   change_player_stat(@player,:name,'John')
@@ -95,6 +97,7 @@ def test_change_player_stats()
   assert_equal(100,result2)
 end
 
+# Call to block any buys without enough fund
 def test_if_player_can_afford_something()
   @player[:money] = 50
   assert_equal(true,can_afford(@player,@chicken))
@@ -104,6 +107,7 @@ def test_if_player_can_t_afford_something()
   assert_equal(false,can_afford(@player,@chicken))
 end
 
+# Used in later implementations to pass in a animal hash
 def test_player_buys_something()
   @player[:money] = 100
   player_buy(@player,@chicken,@farm)

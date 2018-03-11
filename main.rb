@@ -1,19 +1,26 @@
+# Method to find out actual players name
 def player_name(hash)
   return hash[:name]
 end
 
+# Adds or removes player money, mostly called by other methods
 def change_player_money(hash,amount)
   return hash[:money] += amount
 end
 
+# Safety check on the player's money value
 def player_money(hash)
+  return false if !hash.has_key?(:money)
   return hash[:money]
 end
 
+# Adds an item to the player's inventory
+# TODO: Make sure only valid objects are passed into inventory
 def add_item(hash,item)
   hash[:inventory].push(item)
 end
 
+# Returns player's inventory content to be used by other methods
 def player_inventory(hash)
   return hash[:inventory]
 end
