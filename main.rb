@@ -1,3 +1,5 @@
+require_relative 'interface.rb'
+
 # Method to find out actual players name
 def player_name(hash)
   return hash[:name]
@@ -63,6 +65,9 @@ def player_buy(player_hash,object_hash,farm_hash)
   change_player_money(player_hash,-object_hash[:price])
   farm_hash[:animals].push(object_hash)
 end
+
+# End of Definitions
+print_test_line()
 
 
 # End of File
